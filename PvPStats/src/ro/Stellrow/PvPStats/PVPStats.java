@@ -27,11 +27,13 @@ public class PVPStats extends JavaPlugin {
     commandsManager.registerCommands();
 
     }
-    public void onDisable(){
+
+    //TODO Non Async saving?
+    /*public void onDisable(){
         for(Player p : getServer().getOnlinePlayers()){
             liveStorage.removePlayer(p.getUniqueId());
         }
-    }
+    }*/
     private void loadConfig(){
         getConfig().options().copyDefaults(true);
         saveConfig();
