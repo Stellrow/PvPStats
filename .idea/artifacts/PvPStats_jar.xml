@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="PvPStats:jar">
+    <output-path>$PROJECT_DIR$/../../../D/Default/1.12/plugins</output-path>
+    <root id="archive" name="PvPStats.jar">
+      <element id="module-output" name="PvPStats" />
+    </root>
+  </artifact>
+</component>

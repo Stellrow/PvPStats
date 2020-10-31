@@ -1,0 +1,12 @@
+Messages:
+  level-up: '&a[PVPStats] &7Congratulation you leveled up to %currentLevel%'
+  stats:
+    - '&8-=-=-[ &a%player% Statistics &8]-=-=-'
+    - '&7'
+    - '&aKills &8> &r%kills%'
+    - '&aDeaths &8> &r%deaths%'
+    - '&aKillstreak &8> &r%killstreak%'
+    - '&aTop Killstreak &8> &r%topkillstreak%'
+    - '&aLevel &8> &r%level%'
+    - '&aProgress &8> &8[%percentage_bar%&8] &6%percentage%&7% &7(&6%killstonextlevel% &7kills to next level)'
+  me: 'My'

@@ -1,0 +1,14 @@
+name: PvPStats
+author: Stellrow
+version: 1.0
+api-version: 1.13
+main: ro.Stellrow.PvPStats.PVPStats
+
+commands:
+  stats:
+    usage: /stats
+    aliases:
+      - pvpstats
+  pvpstats:
+    usage: /pvpstats
+    description: Admin command
