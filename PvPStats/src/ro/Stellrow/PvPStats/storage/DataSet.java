@@ -1,6 +1,7 @@
 package ro.Stellrow.PvPStats.storage;
 
 public class DataSet {
+    public String name;
     public int kills;
     public int deaths;
     public int topkillstreak;

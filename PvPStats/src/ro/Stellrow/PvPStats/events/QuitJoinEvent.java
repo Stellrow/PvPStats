@@ -1,5 +1,6 @@
 package ro.Stellrow.PvPStats.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,7 +14,10 @@ public class QuitJoinEvent implements Listener {
     }
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
-        pl.liveStorage.loadPlayer(event.getPlayer().getUniqueId());
+        Bukkit.getScheduler().runTaskLater(pl,()->{
+            pl.liveStorage.loadPlayer(event.getPlayer().getUniqueId());
+        },20);
+
     }
     @EventHandler
     public void onQuit(PlayerQuitEvent event){

@@ -18,6 +18,7 @@ public class DataStorage {
         sqLiteHandler = new SQLiteHandler(pl.getDataFolder(),"playerData","playerData",
                 "CREATE TABLE IF NOT EXISTS playerData (" +
                         "`uuid` varchar(100) PRIMARY KEY NOT NULL," +
+                        "`name` varchar(100) NOT NULL," +
                         "`kills` INT NOT NULL," +
                         "`deaths` INT NOT NULL," +
                         "`topkillstreak` INT NOT NULL," +
@@ -28,9 +29,9 @@ public class DataStorage {
         );
         sqLiteHandler.load();
     }
-    public CompletableFuture<Void> createPlayer(UUID player){
+    public CompletableFuture<Void> createPlayer(UUID player,String name){
         return CompletableFuture.runAsync(() -> {
-            sqLiteHandler.addPlayer(player);
+            sqLiteHandler.addPlayer(player,name);
         });
     }
     public CompletableFuture<Boolean> checkPlayer(UUID player){
@@ -39,10 +40,11 @@ public class DataStorage {
     public CompletableFuture<DataSet> getPlayerData(UUID toGet){
         return CompletableFuture.supplyAsync(()->sqLiteHandler.getPlayerData(toGet));
     }
-    public void updatePlayer(UUID toUpdate,DataSet data){
-        Bukkit.getScheduler().runTaskAsynchronously(pl,()->{
-            sqLiteHandler.updatePlayerData(toUpdate,data);
-        });
+    public CompletableFuture<Void> updatePlayer(UUID toUpdate,DataSet data){
+        return CompletableFuture.runAsync(()-> sqLiteHandler.updatePlayerData(toUpdate,data));
+    }
+    public void saveUUIDNonAsync(UUID uuid,DataSet dataSet){
+        sqLiteHandler.updatePlayerData(uuid, dataSet);
     }
 
 

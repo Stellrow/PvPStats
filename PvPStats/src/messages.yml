@@ -1,5 +1,7 @@
 Messages:
   level-up: '&a[PVPStats] &7Congratulation you leveled up to %currentLevel%'
+  loading-data: '&a[PVPStats] &7Loading your data,please wait'
+  data-loaded: '&a[PVPStats] &7Data was loaded!'
   stats:
     - '&8-=-=-[ &a%player% Statistics &8]-=-=-'
     - '&7'

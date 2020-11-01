@@ -9,14 +9,15 @@ import ro.Stellrow.PvPStats.storage.DataStorage;
 import ro.Stellrow.PvPStats.utils.CustomConfig;
 
 public class PVPStats extends JavaPlugin {
+    //Configs
+    public CustomConfig messageConfig = new CustomConfig("messages",this);
     //Storage
     public DataStorage storage = new DataStorage(this);
     public LiveStorage liveStorage = new LiveStorage(this);
     //Managers
     public EventsManager eventsManager = new EventsManager(this);
     public CommandsManager commandsManager = new CommandsManager(this);
-    //Configs
-    public CustomConfig messageConfig = new CustomConfig("messages",this);
+
 
 
     public void onEnable(){
@@ -25,15 +26,15 @@ public class PVPStats extends JavaPlugin {
     liveStorage.updateDataBase();
     eventsManager.registerEvents();
     commandsManager.registerCommands();
+    possibleReload();
 
     }
 
-    //TODO Non Async saving?
-    /*public void onDisable(){
+    public void onDisable(){
         for(Player p : getServer().getOnlinePlayers()){
-            liveStorage.removePlayer(p.getUniqueId());
+            liveStorage.forceSave(p.getUniqueId());
         }
-    }*/
+    }
     private void loadConfig(){
         getConfig().options().copyDefaults(true);
         saveConfig();

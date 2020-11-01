@@ -118,19 +118,20 @@ public class SQLiteHandler {
     }
 
     //Add method
-    public void addPlayer(UUID toAdd){
+    public void addPlayer(UUID toAdd,String name){
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("INSERT INTO " + table + " (uuid,kills,deaths,topkillstreak,level,experience,activekillstreak) VALUES(?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO " + table + " (uuid,name,kills,deaths,topkillstreak,level,experience,activekillstreak) VALUES(?,?,?,?,?,?,?,?)");
             ps.setString(1,toAdd.toString());
-            ps.setInt(2,0);
+            ps.setString(2,name);
             ps.setInt(3,0);
             ps.setInt(4,0);
-            ps.setInt(5,1);
-            ps.setInt(6,0);
+            ps.setInt(5,0);
+            ps.setInt(6,1);
             ps.setInt(7,0);
+            ps.setInt(8,0);
             ps.executeUpdate();
             return;
         } catch (SQLException ex) {
@@ -167,11 +168,11 @@ public class SQLiteHandler {
         ResultSet rs = null;
         try{
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT uuid,kills,deaths,topkillstreak,level,experience,activekillstreak FROM "+table +" WHERE uuid=?");
+            ps = conn.prepareStatement("SELECT uuid,name,kills,deaths,topkillstreak,level,experience,activekillstreak FROM "+table +" WHERE uuid=?");
             ps.setString(1,toGet.toString());
             rs = ps.executeQuery();
             if(rs.next()){
-                Bukkit.getConsoleSender().sendMessage("Found entry");
+                ds.name = rs.getString("name");
                 ds.kills = rs.getInt("kills");
                 ds.deaths = rs.getInt("deaths");
                 ds.topkillstreak = rs.getInt("topkillstreak");
@@ -197,8 +198,7 @@ public class SQLiteHandler {
         PreparedStatement ps = null;
         try{
             conn = getSQLConnection();
-            ps = conn.prepareStatement("INSERT INTO "+table +" (kills,deaths,topkillstreak,level,experience,activekillstreak) VALUES" +
-                    "(?,?,?,?,?,?) WHERE uuid=?");
+            ps = conn.prepareStatement("UPDATE "+table +" SET kills=?,deaths=?,topkillstreak=?,level=?,experience=?,activekillstreak=? WHERE uuid=?");
             ps.setInt(1,dataset.kills);
             ps.setInt(2,dataset.deaths);
             ps.setInt(3,dataset.topkillstreak);
